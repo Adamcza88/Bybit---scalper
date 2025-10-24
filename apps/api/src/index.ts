@@ -109,12 +109,15 @@ fastify.post("/api/signals", async (request, reply) => {
 
 const port = Number(process.env.PORT ?? 3001);
 
-fastify.get("/api/stream", async (request, reply) => {
+fastify.get("/api/stream", (request, reply) => {
+  reply.hijack();
   reply.raw.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
     Connection: "keep-alive"
   });
+
+  reply.raw.write(": connected\n\n");
 
   const timer = setInterval(() => {
     const payload = JSON.stringify({
