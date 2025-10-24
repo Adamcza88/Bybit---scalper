@@ -1,0 +1,21 @@
+{
+  "name": "bybit-scalper",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:core && npm run build:api && npm run build:web",
+    "build:core": "npm run build --workspace @bybit-scalper/core",
+    "build:api": "npm run build --workspace @bybit-scalper/api",
+    "build:web": "npm run build --workspace @bybit-scalper/web",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
